@@ -41,11 +41,11 @@ class UserService:
         the_user = db.query(User).filter(User.email == user.username).first()
 
         if not the_user:
-            raise HTTPException(status_code=404, detail="Invalid Credentials")
+            raise HTTPException(status_code=401, detail="Invalid Credentials!")
         
         # check if the password match
         if not Hash.verify(the_user.password, user.password):
-            raise HTTPException(status_code=400, detail="Incorrect Password")
+            raise HTTPException(status_code=401, detail="Incorrect Password!")
         
         # generate token for the user
         access_token = token.create_access_token(data={"sub": the_user.email})
