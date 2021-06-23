@@ -7,6 +7,7 @@ import Membership from './pages/Membership';
 import Members from './pages/Members';
 import GlobalStyle from './GlobalStyle';
 import AuthRoute from './AuthRouter';
+import Payments from './pages/Payments';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <AuthRoute path="/instructors" exact component={Instructors} />
           <AuthRoute path="/membership" exact component={Membership} />
           <AuthRoute path="/members" exact component={Members} />
+          <AuthRoute path="/payments" exact component={Payments} />
         </Switch>
     </div>
   );

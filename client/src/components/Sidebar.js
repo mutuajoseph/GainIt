@@ -41,6 +41,11 @@ const Sidebar = () => {
                 Members
               </CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to='/payments' activeClassName='activeClicked'>
+              <CDBSidebarMenuItem icon='exclamation'>
+                Payments
+              </CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to='#'>
               <CDBSidebarMenuItem icon='exclamation-circle'>
                 Log out
