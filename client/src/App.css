@@ -1,0 +1,32 @@
+.main-content {
+    padding-left: 16px;
+    margin: .4rem auto;
+
+}
+
+.large-icon {
+    font-size: 32px;
+    color: #b10f2e;
+}
+
+.user-icon {
+    font-size: 24px;
+}
+
+.action-btn {
+    outline: none;
+    border-radius: 4px;
+    border: none;
+    background: #fff;
+}
+
+.action-btn-2 {
+    outline: none;
+    border-radius: 4px;
+    background: #fff;
+    font-size: small;
+    padding: .1rem .4rem;
+    border: 1px solid #b10f2e;
+    color: #b10f2e;
+    font-weight: 600;
+}
