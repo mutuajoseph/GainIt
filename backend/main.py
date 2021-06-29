@@ -5,7 +5,7 @@ from settings.db_config import engine, Base
 
 # import models
 from models.user import User
-from models.instructor import Instructor
+
 
 # create all tables
 Base.metadata.create_all(bind=engine)
@@ -45,16 +45,6 @@ app.include_router(
         401:{'description':'Unauthorized'}}
 )
 
-app.include_router(
-    instructor.router,
-    prefix='/instructors',
-    tags=['Instructor Operations'],
-    responses={
-        200:{'description':'Ok'}, 
-        201:{'description':'Created'}, 
-        400:{'description':'Bad Request'},
-        401:{'description':'Unauthorized'}}
-)
 
 
 
