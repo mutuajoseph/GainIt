@@ -46,3 +46,13 @@ status_code=200
 )
 def create_member(payload: CreateMember, db:Session=Depends(get_db)):
     return member_service.create_member(payload, db)
+
+
+@router.post("/{member_id}/subscribe/{member_type_id}",
+summary="subscribe member to a subscription type",
+response_model=Member,
+response_description="member",
+status_code=200
+)
+def subscribe_member(payload,db:Session=Depends(get_db)):
+    return

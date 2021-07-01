@@ -17,7 +17,7 @@ class MemberType(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     update_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    # members = relationship("MemberMemberType", backref="member_type", cascade="all, delete, delete-orphan")
+    members = relationship("MemberMemberType", backref="member_type", cascade="all, delete, delete-orphan")
 
     def save(self, db: Session):
         db.add(self)
