@@ -9,8 +9,6 @@ from settings.db_config import get_db
 # schema
 from schemas.member import CreateMember, Member
 
-# model
-from models.member import Member as MemberModel
 
 # services
 from services.member import member_service

@@ -23,7 +23,7 @@ fileConfig(config.config_file_name)
 # import models
 from models.user import User
 from models.member_type import MemberType
-from models.member import Member
+from models.member import MemberModel
 from models.member_member_type import MemberMemberType
 from models.invoice import Invoice
 from models.payments import Payments

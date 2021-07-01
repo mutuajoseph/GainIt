@@ -5,7 +5,11 @@ from sqlalchemy.sql.sqltypes import Boolean
 from settings.db_config import Base
 from sqlalchemy import func
 
-class Member(Base):
+from models.member_member_type import MemberMemberType
+from models.invoice import Invoice
+from models.attendance import Attendance
+
+class MemberModel(Base):
     __tablename__ = "members"
     id = Column(Integer, primary_key=True, index=True)
     id_number = Column(Integer, unique=True)
@@ -17,9 +21,9 @@ class Member(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     update_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    # subscriptions = relationship("MemberMemberType", back_populates="member", cascade="all, delete, delete-orphan")
-    # invoices = relationship("Invoices",back_populates="member",cascade="all, delete, delete-orphan")
-    # attendances = relationship("Attendance", back_populates="member", cascade="all, delete, delete-orphan")
+    subscriptions = relationship("MemberMemberType", back_populates="member", cascade="all, delete, delete-orphan")
+    invoices = relationship("Invoice",back_populates="member",cascade="all, delete, delete-orphan")
+    attendances = relationship("Attendance", back_populates="member", cascade="all, delete, delete-orphan")
 
     def save(self, db: Session):
         db.add(self)

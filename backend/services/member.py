@@ -7,7 +7,7 @@ from typing import List, Union
 from settings.db_config import dbsession
 
 # models
-from models.member import Member as MemberModel
+from models.member import MemberModel
 
 # schemas
 from schemas.member import CreateMember, Member

@@ -4,8 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from settings.db_config import engine, Base
 
 # import models
-from models.user import User
-
 from routes import user, mtype, member
 
 app = FastAPI(
