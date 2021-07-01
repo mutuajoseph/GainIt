@@ -17,9 +17,34 @@ class MemberType(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     update_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    members = relationship("MemberMemberType", back_populates="member_type", cascade="all, delete, delete-orphan")
+    # members = relationship("MemberMemberType", backref="member_type", cascade="all, delete, delete-orphan")
 
     def save(self, db: Session):
         db.add(self)
         db.commit()
         return self
+
+    @classmethod
+    def fetch_all(cls, db:Session):
+        return db.query(cls).all()
+    
+
+    @classmethod
+    def check_id_exists(cls, id:int, db:Session):
+        record = db.query(cls).filter(cls.id == id).first()
+        if record:
+            return True
+        else:
+            return False
+
+    @classmethod
+    def get_by_id(cls, id:int, db:Session):
+        return db.query(cls).filter(cls.id == id).first()
+
+    @classmethod
+    def check_member_type_exists(cls, type:str, db:Session):
+        record = db.query(cls).filter(cls.name == type).first()
+        if record:
+            return True
+        else:
+            return False
