@@ -13,6 +13,7 @@ To start talking to our database, the ORM's handle to the database is the Sessio
 
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
+dbsession = SessionLocal()
 """
 Using the Declarative system, we can create classes that include directives to describe the actual database table they will map to
 A class using Declarative at a minimum needs a __tablename__ attribute and atleast one Column
