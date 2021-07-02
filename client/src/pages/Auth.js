@@ -7,7 +7,7 @@ import { adminlogin } from '../redux/actions/userAction';
 import {CircularProgress} from '@material-ui/core'
 import Message from '../components/Message';
 
-const Auth = ({history}) => {
+const Auth = () => {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -89,6 +89,8 @@ const Header = styled.div`
 
   > h2 {
     margin-left: 4px;
+    font-size: 2rem;
+    font-weight: 700;
   }
 `;
 
@@ -99,6 +101,11 @@ const Card = styled.div`
   margin: 0 auto;
   margin-top: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  > h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
 `;
 const FormGroup = styled.div`
   display: flex;
