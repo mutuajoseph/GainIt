@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { GrNext, GrPrevious, MdEdit } from 'react-icons/all';
 import { history } from '../utils/history';
 
-const Table = ({ data, text, route, headers }) => {
+const SubTable = ({ data, text, route, headers }) => {
   const handleEdit = (row) => {
     console.log('edit response', row);
   };
@@ -56,7 +56,7 @@ const Table = ({ data, text, route, headers }) => {
 
   return (
     <>
-      <div style={{ height: '80vh', margin: '20px 0' }}>
+      <div style={{ height: 'auto', margin: '20px 0' }}>
         <TableWrap {...getTableProps()}>
           <thead>
             {
@@ -84,36 +84,45 @@ const Table = ({ data, text, route, headers }) => {
             }
           </thead>
           {/* Apply the table body props */}
-          <tbody {...getTableBodyProps()}>
-            {
-              // Loop over the table rows
-              page.map((row) => {
-                // Prepare the row for display
-                prepareRow(row);
-                return (
-                  // Apply the row props
-                  <tr key={row.number} {...row.getRowProps()}>
-                    {
-                      // Loop over the rows cells
-                      row.cells.map((cell) => {
-                        // Apply the cell props
-                        return (
-                          <>
-                            <td {...cell.getCellProps()}>
-                              {
-                                // Render the cell contents
-                                cell.render('Cell')
-                              }
-                            </td>
-                          </>
-                        );
-                      })
-                    }
-                  </tr>
-                );
-              })
-            }
-          </tbody>
+
+          {!data.length === 0 ? (
+            <>
+              <tbody {...getTableBodyProps()}>
+                {
+                  // Loop over the table rows
+                  page.map((row) => {
+                    // Prepare the row for display
+                    prepareRow(row);
+                    return (
+                      // Apply the row props
+                      <tr key={row.number} {...row.getRowProps()}>
+                        {
+                          // Loop over the rows cells
+                          row.cells.map((cell) => {
+                            // Apply the cell props
+                            return (
+                              <>
+                                <td {...cell.getCellProps()}>
+                                  {
+                                    // Render the cell contents
+                                    cell.render('Cell')
+                                  }
+                                </td>
+                              </>
+                            );
+                          })
+                        }
+                      </tr>
+                    );
+                  })
+                }
+              </tbody>
+            </>
+          ) : (
+            <Wrapper>
+              <p>No data to display</p>
+            </Wrapper>
+          )}
         </TableWrap>
         <TableActions>
           <button onClick={() => previousPage()} disabled={!canPreviousPage}>
@@ -128,10 +137,10 @@ const Table = ({ data, text, route, headers }) => {
   );
 };
 
-export default Table;
+export default SubTable;
 
 const TableWrap = styled.table`
-  width: 1000px;
+  width: 600px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   /* height: 80vh; */
@@ -168,5 +177,19 @@ const TableActions = styled.div`
     outline: none;
     padding: 0 0.8rem;
     border: none;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 15rem;
+  /* right: 10rem; */
+  /* background-color: red; */
+
+  > p {
+    margin-top: 0.5rem;
   }
 `;
