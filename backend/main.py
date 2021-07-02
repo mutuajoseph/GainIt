@@ -4,16 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from settings.db_config import engine, Base
 
 # import models
-from models.user import User
-from models.instructor import Instructor
-
-# create all tables
-Base.metadata.create_all(bind=engine)
-
-# drop all tables
-# Base.metadata.drop_all(bind=engine)
-
-from routes import user, instructor
+from routes import user, mtype, member
 
 app = FastAPI(
     title='GainIT API',
@@ -45,16 +36,9 @@ app.include_router(
         401:{'description':'Unauthorized'}}
 )
 
-app.include_router(
-    instructor.router,
-    prefix='/instructors',
-    tags=['Instructor Operations'],
-    responses={
-        200:{'description':'Ok'}, 
-        201:{'description':'Created'}, 
-        400:{'description':'Bad Request'},
-        401:{'description':'Unauthorized'}}
-)
+app.include_router(mtype.router)
+app.include_router(member.router)
+
 
 
 
