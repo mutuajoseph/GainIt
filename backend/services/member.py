@@ -8,6 +8,8 @@ from settings.db_config import dbsession
 
 # models
 from models.member import MemberModel
+from models.member_type import MemberType
+from models.member_member_type import MemberMemberType
 
 # schemas
 from schemas.member import CreateMember, Member
@@ -44,6 +46,24 @@ class MemberService:
                 dbsession.rollback()
                 raise HTTPException(status_code=500, detail="error while attempting to save record, try again later")
 
+    def subscribe_member(self, member_id:int, member_type_id:int, db:Session):
+        # check member id exists
+        if not MemberModel.check_id_exist(id=member_id, db=db):
+            raise HTTPException(status_code=404, detail="member id does not exist")
+
+        if not MemberType.check_id_exists(id=member_type_id, db=db):
+            raise HTTPException(status_code=404, detail="member type id does not exist")
+
+        try:
+            with dbsession.begin():
+                record = MemberMemberType(
+                    member_id = member_id,
+                    member_type_id = member_type_id
+                )
+                r = record.save(db)
+            return {"message": "member successfully subscribed"}
+        except Exception:
+            dbsession.rollback()
 
 
 

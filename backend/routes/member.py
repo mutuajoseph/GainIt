@@ -1,4 +1,3 @@
-import re
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List, Optional
@@ -7,7 +6,8 @@ from typing import List, Optional
 from settings.db_config import get_db
 
 # schema
-from schemas.member import CreateMember, Member
+from schemas.member import CreateMember, Member, SubscribeMember
+from schemas.message import Message
 
 
 # services
@@ -50,9 +50,9 @@ def create_member(payload: CreateMember, db:Session=Depends(get_db)):
 
 @router.post("/{member_id}/subscribe/{member_type_id}",
 summary="subscribe member to a subscription type",
-response_model=Member,
+response_model=Message,
 response_description="member",
 status_code=200
 )
-def subscribe_member(payload,db:Session=Depends(get_db)):
-    return
+def subscribe_member(member_id:int, member_type_id:int,db:Session=Depends(get_db)):
+    return member_service.subscribe_member(member_id=member_id, member_type_id=member_type_id, db=db)

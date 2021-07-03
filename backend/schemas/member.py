@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import List, Any, Optional
 
+
 """
 id = Column(Integer, primary_key=True, index=True)
 id_number = Column(Integer, unique=True)
@@ -27,10 +28,42 @@ class BaseMember(BaseModel):
 class CreateMember(BaseMember):
     pass
 
+class SubscribeMember(BaseModel):
+    member_id: int
+    member_type_id: int
+
+class Type(BaseModel):
+    """Document member type model"""
+    id: int
+    name: str
+    fee: float
+    description: str
+
+    class Config:
+        orm_mode = True
+
+
+class Subs(BaseModel):
+    member_type: Type
+    class Config:
+        orm_mode = True
+
+
 class Member(BaseMember):
     id: int
+    subscriptions: List[Subs]
     created_at: Optional[datetime]
     update_at: Optional[datetime]
+
+    class Config:
+        orm_mode = True
+
+class SimpleMember(BaseModel):
+    id: int
+    id_number: str
+    first_name: str
+    last_name: str
+    phone_number: str
 
     class Config:
         orm_mode = True

@@ -22,3 +22,4 @@ class MemberMemberType(Base):
         db.add(self)
         db.commit()
         return self
+
