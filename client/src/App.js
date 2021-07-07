@@ -9,6 +9,7 @@ import GlobalStyle from './GlobalStyle';
 import AuthRoute from './AuthRouter';
 import Payments from './pages/Payments';
 import ManageMembership from './pages/ManageMembership';
+import ManageMember from './pages/ManageMember';
 
 function App() {
   return (
@@ -17,10 +18,11 @@ function App() {
       <Switch>
         <Route path='/login' exact component={Auth} />
         <AuthRoute path='/' exact component={Dashboard} />
-        <AuthRoute path='/instructors' exact component={Instructors} />
+        {/* <AuthRoute path='/instructors' exact component={Instructors} /> */}
         <AuthRoute path='/membership' exact component={Membership} />
         <AuthRoute path='/membership/:id' exact component={ManageMembership} />
         <AuthRoute path='/members' exact component={Members} />
+        <AuthRoute path="/member/:id"exact component={ManageMember}/>
         <AuthRoute path='/payments' exact component={Payments} />
       </Switch>
     </div>

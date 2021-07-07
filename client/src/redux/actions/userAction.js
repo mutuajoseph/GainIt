@@ -2,6 +2,7 @@ import {
   ADMIN_LOGIN_FAIL,
   ADMIN_LOGIN_REQUEST,
   ADMIN_LOGIN_SUCCESS,
+  ADMIN_LOGOUT,
 } from '../constants/userConstant';
 import GAINIT_URL from '../api';
 import {history} from '../../utils/history'
@@ -47,3 +48,14 @@ export const adminlogin = (userdetails) => async (dispatch) => {
     });
   }
 };
+
+// logout 
+export const adminLogOut = () => async dispatch => {
+    dispatch({
+      type: ADMIN_LOGOUT
+    })
+    // empty the localStorage
+    localStorage.clear()
+    // redirect to login
+    history.push('/login')
+}

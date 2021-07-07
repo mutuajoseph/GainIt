@@ -56,7 +56,7 @@ const Table = ({ data, text, route, headers }) => {
 
   return (
     <>
-      <div style={{ height: '80vh', margin: '20px 0' }}>
+      <div style={{ height: '90vh', margin: '20px 0' }}>
         <TableWrap {...getTableProps()}>
           <thead>
             {
@@ -84,36 +84,43 @@ const Table = ({ data, text, route, headers }) => {
             }
           </thead>
           {/* Apply the table body props */}
-          <tbody {...getTableBodyProps()}>
-            {
-              // Loop over the table rows
-              page.map((row) => {
-                // Prepare the row for display
-                prepareRow(row);
-                return (
-                  // Apply the row props
-                  <tr key={row.number} {...row.getRowProps()}>
-                    {
-                      // Loop over the rows cells
-                      row.cells.map((cell) => {
-                        // Apply the cell props
-                        return (
-                          <>
-                            <td {...cell.getCellProps()}>
-                              {
-                                // Render the cell contents
-                                cell.render('Cell')
-                              }
-                            </td>
-                          </>
-                        );
-                      })
-                    }
-                  </tr>
-                );
-              })
-            }
-          </tbody>
+
+          {data.length !== 0 ? (
+            <tbody {...getTableBodyProps()}>
+              {
+                // Loop over the table rows
+                page.map((row) => {
+                  // Prepare the row for display
+                  prepareRow(row);
+                  return (
+                    // Apply the row props
+                    <tr key={row.number} {...row.getRowProps()}>
+                      {
+                        // Loop over the rows cells
+                        row.cells.map((cell) => {
+                          // Apply the cell props
+                          return (
+                            <>
+                              <td {...cell.getCellProps()}>
+                                {
+                                  // Render the cell contents
+                                  cell.render('Cell')
+                                }
+                              </td>
+                            </>
+                          );
+                        })
+                      }
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
+          ) : (
+            <Wrapper>
+              <p>No data to display</p>
+            </Wrapper>
+          )}
         </TableWrap>
         <TableActions>
           <button onClick={() => previousPage()} disabled={!canPreviousPage}>
@@ -168,5 +175,19 @@ const TableActions = styled.div`
     outline: none;
     padding: 0 0.8rem;
     border: none;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 15rem;
+  /* right: 10rem; */
+  /* background-color: red; */
+
+  > p {
+    margin-top: 0.5rem;
   }
 `;

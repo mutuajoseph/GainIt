@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -8,8 +9,16 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
+import { adminLogOut } from '../redux/actions/userAction';
 
 const Sidebar = () => {
+
+  const dispatch = useDispatch()
+
+  const logout = e => {
+    dispatch(adminLogOut())
+  }
+
   return (
     <div
       style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}
@@ -30,9 +39,9 @@ const Sidebar = () => {
             <NavLink exact to='/' activeClassName='activeClicked'>
               <CDBSidebarMenuItem icon='columns'>Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to='/instructors' activeClassName='activeClicked'>
+            {/* <NavLink exact to='/instructors' activeClassName='activeClicked'>
               <CDBSidebarMenuItem icon='table'>Instructors</CDBSidebarMenuItem>
-            </NavLink>
+            </NavLink> */}
             <NavLink exact to='/membership' activeClassName='activeClicked'>
               <CDBSidebarMenuItem icon='user'>Membership</CDBSidebarMenuItem>
             </NavLink>
@@ -46,7 +55,7 @@ const Sidebar = () => {
                 Payments
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to='#'>
+            <NavLink exact to='#' onClick={logout}>
               <CDBSidebarMenuItem icon='exclamation-circle'>
                 Log out
               </CDBSidebarMenuItem>

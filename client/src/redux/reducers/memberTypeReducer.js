@@ -46,7 +46,7 @@ export const addMemberTypeReducer = (state = {}, action) => {
     case ADD_MEMBERSHIP_TYPE_SUCCESS:
       return {
         loading: false,
-        memberTypesList: [...state.memberTypesList, action.payload],
+        membershipType: action.payload,
       };
     case ADD_MEMBERSHIP_TYPE_FAIL:
       return { loading: false, error: action.payload };

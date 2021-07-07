@@ -7,12 +7,18 @@ import { adminLoginReducer } from './reducers/userReducer';
 import {
   fetchMembersTypeReducer,
   fetchMemberTypeReducer,
+  addMemberTypeReducer
 } from './reducers/memberTypeReducer';
+import { addMemberReducer, fetchMembersReducer, fetchSingleMemberReducer } from './reducers/memberReducer';
 
 const reducer = combineReducers({
   adminLogin: adminLoginReducer,
   membershipTypes: fetchMembersTypeReducer,
   membershipType: fetchMemberTypeReducer,
+  addMembership: addMemberTypeReducer,
+  membersList:fetchMembersReducer,
+  singleMember:fetchSingleMemberReducer,
+  addMember:addMemberReducer
 });
 
 const adminInforFromStorage = localStorage.getItem('adminInfo')

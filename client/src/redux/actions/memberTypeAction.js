@@ -1,5 +1,8 @@
 import GAINIT_URL from '../api';
 import {
+  ADD_MEMBERSHIP_TYPE_FAIL,
+  ADD_MEMBERSHIP_TYPE_REQUEST,
+  ADD_MEMBERSHIP_TYPE_SUCCESS,
   FETCH_MEMBERSHIP_TYPE_FAIL,
   FETCH_MEMBERSHIP_TYPE_REQUEST,
   FETCH_MEMBERSHIP_TYPE_SUCCESS,
@@ -23,7 +26,7 @@ export const fetchmemberType = memberTypeId => async dispatch => {
       type: FETCH_MEMBERSHIP_TYPE_SUCCESS,
       payload: data
     })
-    console.log("member type response", data)
+    // console.log("member type response", data)
   } catch (err) {
     dispatch({
       type: FETCH_MEMBERSHIP_TYPE_FAIL,
@@ -51,7 +54,7 @@ export const fetchMemberTypes = () => async (dispatch) => {
       payload: data,
     });
 
-    console.log('fetch member types response', data);
+    // console.log('fetch member types response', data);
   } catch (err) {
     dispatch({
       type: FETCH_MEMBER_TYPES_FAIL,
@@ -69,20 +72,23 @@ export const addMembershipType = membershipDetails => async dispatch => {
   try {
     
     dispatch({
-      type: FETCH_MEMBER_TYPES_REQUEST
+      type: ADD_MEMBERSHIP_TYPE_REQUEST
     })
 
     const { data } = await GAINIT_URL.post(`/member_types`, membershipDetails)
 
     dispatch({
-      type: FETCH_MEMBER_TYPES_SUCCESS,
+      type: ADD_MEMBERSHIP_TYPE_SUCCESS,
       payload: data
     })
-    console.log("add membership type response", data)
+    // console.log("add membership type response", data)
+
+    // TODO: think of a better way to update the data from state
+    dispatch(fetchMemberTypes())
 
   } catch (err) {
     dispatch({
-      type: FETCH_MEMBER_TYPES_FAIL,
+      type: ADD_MEMBERSHIP_TYPE_FAIL,
       payload:
         err.response && err.response.data.detail
           ? err.response.data.detail

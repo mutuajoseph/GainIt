@@ -1,69 +1,52 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
-import SubTable from '../components/SubTable';
-import '../App.css';
 import HeaderNav from '../components/HeaderNav';
+import SubTable from '../components/SubTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchmemberType } from '../redux/actions/memberTypeAction';
+import { fetchSingleMember } from '../redux/actions/membersAction';
 
-const headers = [
-  {
-    Header: 'First Name',
-    accessor: 'first_name',
-  },
-  {
-    Header: 'Last Name',
-    accessor: 'last_name', // accessor is the "key" in the data
-  },
-  {
-    Header: 'Phone Number',
-    accessor: 'phone_number',
-  },
-];
-
-const ManageMembership = ({ match }) => {
+const ManageMember = ({ match }) => {
   // dispatch instance
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchmemberType(match.params.id));
+    dispatch(fetchSingleMember(match.params.id));
   }, []);
 
-  // fetch membership type information
-  const { memberType } = useSelector((state) => state.membershipType);
+  // get the member from state
+  const { member } = useSelector((state) => state.singleMember);
 
   return (
     <Container>
       <Sidebar />
       <main className='main-content'>
         <HeaderNav />
-        <SubHeader>Manage Membership Type</SubHeader>
-        {memberType ? (
+        <SubHeader> Manage Member page</SubHeader>
+        {member ? (
           <>
             <CardWrap>
               <CardInfo>
                 {/* TODO: WRITE STYLES FOR THIS COLUMN */}
-                Membership Type Info
+                Member Info
                 <p>
-                  Membership Name: <span>{memberType.name}</span>
+                  Member ID: <span>{member.id_number}</span>
                 </p>
                 <p>
-                  Membership Description: <span>{memberType.description}</span>
+                  Member First Name: <span>{member.first_name}</span>
                 </p>
                 <p>
-                  Membership Fee: <span>{memberType.fee}</span>
+                  Member Last Name: <span>{member.last_name}</span>
                 </p>
-                {/* TODO: BUTTON TO ADD MEMBER TO MEMBERSHIP TYPE */}
               </CardInfo>
               <CardTable>
-                {/* TODO: FETCH MEMBER FROM API */}
-                <SubTable
-                  data={memberType.members}
+                {/* TODO: FETCH MEMBER PYMENT HISTORY FROM API */}
+                {/* <SubTable
+                //   data={member.members}
                   text='Manage Member'
                   route='/member'
-                  headers={headers}
-                />
+                //   headers={headers}
+                /> */}
               </CardTable>
             </CardWrap>
           </>
@@ -75,19 +58,16 @@ const ManageMembership = ({ match }) => {
   );
 };
 
-export default ManageMembership;
+export default ManageMember;
 
 const Container = styled.div`
   display: flex;
-  /* flex-direction: column; */
-  margin: 0 auto;
 `;
 const SubHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
-
 const CardWrap = styled.div`
   /* border: 1px solid #111; */
   width: 1000px;
@@ -109,3 +89,4 @@ const CardTable = styled.div`
 const Loading = styled.div`
   width: 1000px;
 `;
+

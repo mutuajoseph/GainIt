@@ -85,7 +85,7 @@ const SubTable = ({ data, text, route, headers }) => {
           </thead>
           {/* Apply the table body props */}
 
-          {!data.length === 0 ? (
+          {data.length !== 0 ? (
             <>
               <tbody {...getTableBodyProps()}>
                 {
